@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="28" viewBox="0 0 1400 28" role="img" aria-label="live status">
+  <rect width="1400" height="28" fill="#060910"/>
+  <circle cx="24" cy="14" r="5" fill="#5eead4">
+    <animate attributeName="opacity" values="1;0.25;1" dur="1.6s" repeatCount="indefinite"/>
+  </circle>
+  <text x="40" y="18" fill="#94a3b8" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13">
+    LIVE  ·  BOCA RATON  ·  BUILDING JARVIS  ·  AGENTIC SYSTEMS
+  </text>
+  <line x1="980" y1="14" x2="1370" y2="14" stroke="#e8c56a" stroke-width="1" stroke-dasharray="4 8">
+    <animate attributeName="stroke-dashoffset" values="0;24" dur="1.2s" repeatCount="indefinite"/>
+  </line>
+</svg>
