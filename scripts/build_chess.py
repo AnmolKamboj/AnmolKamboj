@@ -164,18 +164,45 @@ def paste_piece(canvas: Image.Image, sprites: dict[str, Image.Image], kind: str,
     canvas.alpha_composite(sprite, (int(cx - sprite.size[0] / 2), int(cy - sprite.size[1] / 2)))
 
 
+def wrap_text(draw, text, font, max_width):
+    words = text.split()
+    lines = []
+    line = ""
+    for word in words:
+        trial = (line + " " + word).strip()
+        if line and draw.textlength(trial, font=font) > max_width:
+            lines.append(line)
+            line = word
+        else:
+            line = trial
+    if line:
+        lines.append(line)
+    return lines
+
+
 def render(board, sprites, moving, t, last, caption, mate) -> Image.Image:
-    cell = 46
-    origin = 24
+    cell = 44
+    gutter = 26
+    board_x = 36 + gutter
+    board_y = 56
     board_px = cell * 8
-    W, H = 760, 460
+    W, H = 800, 510
     img = Image.new("RGBA", (W, H), BOARD_BG + (255,))
     d = ImageDraw.Draw(img)
-    regular = ImageFont.truetype(str(FONTS / "JetBrainsMono-Regular.ttf"), 15)
-    bold = ImageFont.truetype(str(FONTS / "JetBrainsMono-Bold.ttf"), 18)
+    regular = ImageFont.truetype(str(FONTS / "JetBrainsMono-Regular.ttf"), 14)
+    bold = ImageFont.truetype(str(FONTS / "JetBrainsMono-Bold.ttf"), 16)
     small = ImageFont.truetype(str(FONTS / "JetBrainsMono-Regular.ttf"), 12)
 
-    d.text((28, 12), "I actually play this game. Morphy just plays it better.", font=bold, fill=TEXT)
+    d.text((28, 16), "I actually play this game. Morphy just plays it better.", font=bold, fill=TEXT)
+
+    # Board well: coordinates sit in the gutters, clear of the rounded corners.
+    well = [
+        24,
+        48,
+        board_x + board_px + 10,
+        board_y + board_px + gutter + 4,
+    ]
+    d.rounded_rectangle(well, radius=10, fill=PANEL_BG)
 
     last_cells = set()
     if last:
@@ -184,16 +211,19 @@ def render(board, sprites, moving, t, last, caption, mate) -> Image.Image:
 
     for r in range(8):
         for c in range(8):
-            x0 = origin + c * cell
-            y0 = 40 + r * cell
+            x0 = board_x + c * cell
+            y0 = board_y + r * cell
             fill = DARK if (c + r) % 2 else LIGHT
             if (c, r) in last_cells:
                 fill = HIGHLIGHT
             d.rectangle([x0, y0, x0 + cell, y0 + cell], fill=fill)
 
     for i in range(8):
-        d.text((origin + i * cell + 22, 40 + board_px + 4), "abcdefgh"[i], font=small, fill=MUTED)
-        d.text((10, 40 + i * cell + 20), str(8 - i), font=small, fill=MUTED)
+        file_w = d.textlength("abcdefgh"[i], font=small)
+        d.text((board_x + i * cell + (cell - file_w) / 2, board_y + board_px + 6), "abcdefgh"[i], font=small, fill=MUTED)
+        rank = str(8 - i)
+        rank_w = d.textlength(rank, font=small)
+        d.text((board_x - 8 - rank_w, board_y + i * cell + (cell - 12) / 2), rank, font=small, fill=MUTED)
 
     moving_from = sq(moving[1]) if moving else None
 
@@ -204,8 +234,8 @@ def render(board, sprites, moving, t, last, caption, mate) -> Image.Image:
                 continue
             if moving and (c, r) == moving_from:
                 continue
-            cx = origin + c * cell + cell / 2
-            cy = 40 + r * cell + cell / 2
+            cx = board_x + c * cell + cell / 2
+            cy = board_y + r * cell + cell / 2
             paste_piece(img, sprites, kind, cx, cy)
 
     if moving:
@@ -213,49 +243,45 @@ def render(board, sprites, moving, t, last, caption, mate) -> Image.Image:
         c0, r0 = sq(src)
         c1, r1 = sq(dst)
         e = ease(t)
-        x0 = origin + c0 * cell + cell / 2
-        y0 = 40 + r0 * cell + cell / 2
-        x1 = origin + c1 * cell + cell / 2
-        y1 = 40 + r1 * cell + cell / 2
+        x0 = board_x + c0 * cell + cell / 2
+        y0 = board_y + r0 * cell + cell / 2
+        x1 = board_x + c1 * cell + cell / 2
+        y1 = board_y + r1 * cell + cell / 2
         paste_piece(img, sprites, kind, x0 + (x1 - x0) * e, y0 + (y1 - y0) * e)
 
-    panel = [440, 36, 740, 440]
+    panel = [well[2] + 16, 48, W - 24, H - 24]
     d.rounded_rectangle(panel, radius=10, fill=PANEL_BG)
-    d.text((456, 50), "WHY THIS IS HERE", font=small, fill=ACCENT)
-    blurb = [
-        "I play chess a lot. Blitz, rapid,",
-        "sometimes a slow game I abandon",
-        "when dinner happens.",
-        "",
-        "This is the Opera Game. Morphy",
-        "gives a queen and still mates.",
-        "I give a queen and open Lichess",
-        "analysis so I can feel seen.",
-        "",
-        "Theatre kid who likes a good",
-        "finish. Also a person who has",
-        "premoved into mate more than once.",
-    ]
-    y = 72
-    for line in blurb:
-        d.text((456, y), line, font=regular, fill=TEXT if line else MUTED)
-        y += 16
+    inner_x = panel[0] + 20
+    inner_right = panel[2] - 20
+    max_w = inner_right - inner_x
 
-    wrapped = []
-    words = caption.split()
-    line = ""
-    for word in words:
-        trial = (line + " " + word).strip()
-        if len(trial) > 34:
-            wrapped.append(line)
-            line = word
-        else:
-            line = trial
-    if line:
-        wrapped.append(line)
-    d.multiline_text((456, 318), "\n".join(wrapped), font=regular, fill=ACCENT if not mate else (230, 80, 80), spacing=4)
+    d.text((inner_x, panel[1] + 16), "WHY THIS IS HERE", font=small, fill=ACCENT)
+    blurb = (
+        "I play chess a lot. Blitz, rapid, "
+        "sometimes a slow game I abandon when dinner happens.\n\n"
+        "This is the Opera Game. Morphy gives a queen and still mates. "
+        "I give a queen and open chess.com analysis so I can feel seen.\n\n"
+        "Also a person who has premoved into mate more than once."
+    )
+    y = panel[1] + 40
+    for para in blurb.split("\n"):
+        if not para:
+            y += 10
+            continue
+        for line in wrap_text(d, para, regular, max_w):
+            d.text((inner_x, y), line, font=regular, fill=TEXT)
+            y += 18
+
+    caption_lines = wrap_text(d, caption, regular, max_w)
     if mate:
-        d.text((456, 410), "CHECKMATE. I would have resigned on move 12.", font=small, fill=(230, 80, 80))
+        caption_lines.append("CHECKMATE. I would have resigned on move 12.")
+    caption_h = len(caption_lines) * 18
+    cy = panel[3] - 22 - caption_h
+    if cy < y + 16:
+        cy = y + 16
+    for line in caption_lines:
+        d.text((inner_x, cy), line, font=regular, fill=ACCENT if not mate else (230, 80, 80))
+        cy += 18
 
     return img.convert("RGB")
 

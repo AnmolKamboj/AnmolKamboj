@@ -29,21 +29,21 @@ STATS_PATH = ASSETS / "stats.json"
 # --- 21st.dev recipe (do not "improve" these) ---
 CELL = 3
 CHARSET = "01"
-BG_BLUR = 12
+BG_BLUR = 3
 BG_OPACITY = 1.0
 TINT = (0, 0, 0)
-TINT_OPACITY = 0.50
-BRIGHTNESS = -100
-CONTRAST = -100
+TINT_OPACITY = 0.08
+BRIGHTNESS = 0
+CONTRAST = 12
 SATURATION = 100
 GRAYSCALE = 0
 PFX = {
-    "vignette": 0.59,
-    "scanLines": 0.28,
-    "chromatic": 0.40,
-    "bloom": 0.60,
-    "filmGrain": 0.40,
-    "glitch": 0.20,
+    "vignette": 0.22,
+    "scanLines": 0.14,
+    "chromatic": 0.16,
+    "bloom": 0.12,
+    "filmGrain": 0.18,
+    "glitch": 0.08,
 }
 
 # Compact header. Portrait is a side panel, not a full-page cover.
@@ -173,7 +173,10 @@ def prepare_photo() -> Image.Image:
     left = max(0, (w - side) // 2 + int(w * 0.02))
     top = int(h * 0.02)
     photo = photo.crop((left, top, min(w, left + side), min(h, top + int(side * 1.28))))
-    return photo.resize((PORTRAIT_W, PORTRAIT_H), Image.Resampling.LANCZOS)
+    photo = photo.resize((PORTRAIT_W, PORTRAIT_H), Image.Resampling.LANCZOS)
+    photo = ImageEnhance.Contrast(photo).enhance(1.08)
+    photo = ImageEnhance.Sharpness(photo).enhance(1.25)
+    return photo
 
 
 def render_ascii(photo: Image.Image, rng: random.Random) -> Image.Image:
@@ -181,7 +184,8 @@ def render_ascii(photo: Image.Image, rng: random.Random) -> Image.Image:
     #    Brightness/contrast -100 would wipe glyphs if applied after draw,
     #    so they hit the photo layer only. That is how the 21st.dev look
     #    keeps a black field with colored 01 on top.
-    bg = photo.filter(ImageFilter.GaussianBlur(BG_BLUR))
+    # Keep the photo itself, with a light blur so 01 sit on real detail, not mush.
+    bg = Image.blend(photo, photo.filter(ImageFilter.GaussianBlur(BG_BLUR)), 0.28)
     if BG_OPACITY < 1:
         empty = Image.new("RGB", photo.size, (0, 0, 0))
         bg = Image.blend(empty, bg, BG_OPACITY)
@@ -202,7 +206,12 @@ def render_ascii(photo: Image.Image, rng: random.Random) -> Image.Image:
             # animStyle flicker, animIntensity 0: almost still, a few cells flip
             if rng.random() < 0.012:
                 ch = "1" if ch == "0" else "0"
-            draw.text((x, y - 1), ch, font=font, fill=color)
+            glyph = (
+                min(255, int(color[0] * 1.06 + 6)),
+                min(255, int(color[1] * 1.05 + 4)),
+                min(255, int(color[2] * 1.04 + 2)),
+            )
+            draw.text((x, y - 1), ch, font=font, fill=glyph)
 
     img = chromatic(canvas, PFX["chromatic"])
     img = bloom(img, PFX["bloom"])
@@ -243,13 +252,13 @@ def render_card() -> Image.Image:
     d.line([(x, 26), (x + width, 26)], fill=RULE, width=1)
 
     rows = [
-        ("OS", "Windows, AWS"),
+        ("OS", "Windows, macOS, Linux"),
         ("Uptime", age_label()),
-        ("Host", "Software engineer first, chess menace second"),
-        ("Kernel", "CS · FAU · 3.90"),
+        ("Host", "Builder first, gamer second"),
+        ("Kernel", "Computer Science, Philosophy, Physics"),
         ("i18n", "Hindi, English"),
         ("Variant", "right-handed. bats left. yes, it is a problem"),
-        ("Scheduler", "agents by day, Lichess when the build finishes"),
+        ("Scheduler", "deep work blocks. notifications go to /dev/null"),
         ("Runlevel", "Boca Raton. peak hours after 22:00"),
     ]
     y = 38
@@ -260,7 +269,7 @@ def render_card() -> Image.Image:
     y += 8
     section(d, regular, x, y, width, "AFK")
     y += 28
-    dotted_row(d, regular, x, y, "Hobbies", "chess, Witcher 3, RDR2", width)
+    dotted_row(d, regular, x, y, "Hobbies", "chess, video games, doomscrolling (unpaid)", width)
     y += 20
     dotted_row(d, regular, x, y, "Lived", "Dehradun, Florida", width)
 

@@ -8,6 +8,9 @@ Software engineer in Boca Raton. I work on agentic security systems and the clou
 
 Dehradun to Florida. MS in Computer Science at FAU. I take a multi-step job, keep the context, and leave a trail you can inspect when something breaks.
 
+> [!WARNING]
+> I build applications. If this page starts talking about what happens after the click, that is not a slogan. That is the job.
+
 ## Work
 
 - [**Penti.AI**](https://portfolio-nine-lovat-52.vercel.app/) (Jun 2025 to present). Agentic AI and full stack. Recon, scanning with context, validation before anyone calls it a win, reports people can use. Python, Tailwind, AWS.
@@ -38,13 +41,13 @@ My contribution graph, except a ship is allowed to shoot it. The squares are rea
 
 ## Chess
 
-I put a board here because I play. Blitz, rapid, the occasional slow game I abandon when dinner happens. The clip is Morphy's Opera Game. He gives a queen and still mates. I give a queen and open the analysis board.
+I put a board here because I play. Blitz, rapid, the occasional slow game I abandon when dinner happens. The clip is Morphy's Opera Game. He gives a queen and still mates. I give a queen and open chess.com analysis.
 
 <p align="center">
   <img src="assets/chess.gif" alt="Animated Opera Game on a real chessboard" width="72%" />
 </p>
 
-If you want a game, send a Lichess challenge. I will accept, play too fast, and blame the clock.
+If you want a game, send a chess.com challenge. I will accept, play too fast, and blame the clock.
 
 ## Connect
 
