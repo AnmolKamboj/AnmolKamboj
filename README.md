@@ -1,89 +1,57 @@
 <p align="center">
-  <img src="assets/wordmark.png" alt="Anmol Kamboj" width="100%" />
+  <img src="assets/ascii-portrait.gif" alt="Anmol Kamboj as binary ASCII art" width="100%" />
 </p>
+
+# Hi there, I'm **Anmol Kamboj**
+
+Software engineer in Boca Raton. I build agentic security systems, cloud-backed software, and interfaces that do not waste your time. Built to make things work. Curious enough to break them too.
+
+> [!WARNING]
+> I play a lot of chess. If this page starts talking about hanging queens, that is not a metaphor. That is my Tuesday.
+
+I like clean interfaces, but I also like knowing what happens after the button gets clicked. React and Tailwind on the front. Python, Go, and AWS behind it. Agents when a dashboard is not enough.
+
+Dehradun to Florida. Still translating weather, measurements, and small talk. Quiet by default. If something is interesting, it gets free rent in my head.
+
+## Work
+
+- [**Penti.AI**](https://portfolio-nine-lovat-52.vercel.app/) (Jun 2025 to present) - Agentic AI and full stack. Recon, scanning with context, validation before anyone calls it a win, reports people can actually use. Python, Tailwind, AWS.
+- [**FourKites**](https://www.fourkites.com/) (Aug 2022 to May 2023) - Appointment Manager for carrier pickup and drop-off. Go, Python, HTML. Cut the slow path by about 15%, shipped a pile of UI, automated 50 existing flows.
+
+## School
+
+- M.S. Computer Science, Florida Atlantic University, May 2026. GPA 3.90.
+- B.E. Computer Science (Gaming and Graphics), Chandigarh University, 2023.
+
+Former theatre kid. I used to act, dance, mimic people, and tell bad jokes on stage. Now I do a version of that with pull requests. Chess, The Witcher 3, and RDR2 keep the sleep schedule honest. GTA VI is the official reason a PS5 will eventually exist. Grass contact: still unverified.
+
+## The stack I reach for
+
+React, Next.js, TypeScript, Tailwind, HTML, CSS. Python, Go, SQL, Flask, REST. AWS, Docker, CI/CD, IAM, GCP. LLM tooling and agent orchestration when the job is more than another admin panel.
+
+## GitHub activity
+
+This is my contribution graph playing space invaders. Same engine [asamassekou10](https://github.com/asamassekou10) used. The squares are real weeks. The ship is coping.
 
 <p align="center">
-  <img src="assets/pulse.svg" alt="Live status" width="100%" />
+  <img src="assets/space-shooter.gif" alt="GitHub contribution graph as a space shooter" width="100%" />
 </p>
+
+## Chess, because I actually play
+
+I did not put a board here to look clever. I put it here because I lose games at 1am and then think about them in the shower. The clip is the Opera Game. Morphy sacrifices a queen and mates. I sacrifice a queen and open the analysis board so I can say "yeah I saw that" to nobody.
 
 <p align="center">
-  <img src="assets/header.png" alt="Public dossier for Anmol Kamboj" width="100%" />
+  <img src="assets/chess.gif" alt="Animated Opera Game on a real chessboard" width="100%" />
 </p>
 
-<p align="center">
-  <a href="https://portfolio-nine-lovat-52.vercel.app/"><b>Portfolio</b></a>
-  &nbsp;·&nbsp;
-  <a href="https://www.linkedin.com/in/anm0lkamb0j">LinkedIn</a>
-  &nbsp;·&nbsp;
-  <a href="mailto:anmolkamboj@gmail.com">Email</a>
-  &nbsp;·&nbsp;
-  <a href="https://github.com/AnmolKamboj">GitHub</a>
-</p>
+If you want a game, send a Lichess challenge. I will accept, play too fast, and blame the time control.
 
-I am a software engineer in Boca Raton. I build **agentic systems** and the **cloud security** around them — the kind of software that can take a multi-step job, keep context, and still be inspectable when something goes wrong.
+## Connect
 
-The through-line is practical: a clean interface on the front, orchestration and AWS behind it, and an agent only when a dashboard is not enough.
-
----
-
-## Now
-
-**Jarvis** — a Telegram-native personal agent. One persistent interface that already knows the work, instead of a new chat that needs the same briefing every hour.
-
-**Penti.AI** — agentic penetration testing in production. Recon that maps the real surface, scanning with context, validation before the victory lap, reports people can use.
-
----
-
-## Selected work
-
-| Where | What I actually built |
-| --- | --- |
-| [Penti.AI](https://portfolio-nine-lovat-52.vercel.app/) · Agentic AI & Full Stack · Jun 2025 – present | Multi-step agent workflows for automated reconnaissance, vulnerability scanning, exploitation logic, and reporting. Python, Tailwind, AWS. |
-| [FourKites](https://www.fourkites.com/) · Software Engineer · Aug 2022 – May 2023 | Appointment Manager for carrier pickup and drop-off tracking. Go, Python, HTML. Cut performance time ~15%, shipped 10+ UI features, automated 50 existing flows. |
-| Jarvis · building | Personal agent inside Telegram with memory that survives the next conversation. Deployed on Railway. |
-
----
-
-## Education
-
-- **M.S. Computer Science**, Florida Atlantic University — May 2026 · GPA 3.90 / 4.0
-- **B.E. Computer Science (Gaming & Graphics)**, Chandigarh University — June 2023
-
-Saharanpur → New Delhi → Florida. Right-handed, left-handed batsman. I like systems that look quiet until the last move.
-
----
-
-## Stack I actually reach for
-
-| Layer | Tools |
-| --- | --- |
-| Interface | React, Next.js, TypeScript, Tailwind |
-| Systems | Python, Go, SQL, Flask, REST |
-| Cloud | AWS, Docker, CI/CD, IAM, GCP |
-| Agents | LLM tooling, orchestration, tool calling |
-
----
-
-## Contribution theater
-
-The green squares become a shooting gallery. This file refreshes from GitHub Actions using [gh-space-shooter](https://github.com/czl9707/gh-space-shooter) — the same engine as the arcade GIFs making the rounds on profiles.
-
-<p align="center">
-  <img src="assets/space-shooter.gif" alt="Space shooter generated from GitHub contributions" width="100%" />
-</p>
-
----
-
-## Tactical layer
-
-An original animation of the Opera Game (Morphy, 1858). Morphy gives material away on purpose, then ends it on the back rank. That is the instinct I want in agent workflows and cloud security: less noise, one clean finishing line.
-
-<p align="center">
-  <img src="assets/chess.gif" alt="Animated Opera Game chess board" width="100%" />
-</p>
-
----
-
-<p align="center">
-  <sub>Custom dossier. No paid profile skin. Header stats refresh daily.</sub>
-</p>
+- [Portfolio](https://portfolio-nine-lovat-52.vercel.app/)
+- [LinkedIn](https://www.linkedin.com/in/anm0lkamb0j)
+- [Instagram](https://www.instagram.com/anm0l_kamb0j/)
+- [X](https://x.com/Anm0lKamb0j)
+- [Email](mailto:anmolkamboj@gmail.com)
+- [GitHub](https://github.com/AnmolKamboj)

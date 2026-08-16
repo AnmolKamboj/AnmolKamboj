@@ -49,11 +49,6 @@ WORK = [
 
 PROJECTS = [
     {
-        "name": "Jarvis",
-        "status": "building",
-        "summary": "A Telegram-native personal agent with persistent context, so I stop re-briefing a new chat every hour.",
-    },
-    {
         "name": "Penti.AI",
         "status": "production",
         "summary": "Multi-step agent workflows for automated reconnaissance, vulnerability scanning, exploitation logic, and reporting.",

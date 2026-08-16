@@ -4,8 +4,10 @@ on:
   schedule:
     - cron: "0 1 * * *"
   workflow_dispatch:
-  # Manual or nightly only. First push keeps the themed GIF;
-  # run this after public contributions exist.
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/space-shooter.yml"
 
 permissions:
   contents: write
